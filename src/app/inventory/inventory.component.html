@@ -1,0 +1,82 @@
+<div class="container">
+	<div class="row justify-content-center">
+
+		<table class="table table-narrow mb-3">
+
+			<thead>
+				<tr>
+					<th scope="col">Image</th>
+					<th scope="col">Name</th>
+					<th scope="col">Price</th>
+					<th scope="col"></th>
+					<th scope="col">Message</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr *ngFor="let i of inventory">
+
+					<td>
+						<img img="img" [src]="i.image" style="max-width: 75px;"></td>
+						<td>{{i.name}}</td>
+						<td>{{i.price | currency}}</td>
+						<td>
+							<button class="btn btn-danger" type="button" (click)="decreaseQty(i)"> - </button>
+							<input type="number" [(ngModel)]="i.qty" style="max-width: 40px; margin: 10px;">
+							<button class="btn btn-success" type="button" (click)="increaseQty(i)"> + </button>
+							</td>
+
+							<td *ngIf="i.qty === 0" class="cart-empty">
+								<p>No {{i.name}} today?</p>
+							</td>
+
+							<td *ngIf="i.qty > 0 && i.qty < i.inStock" class="in-stock">
+								<p>Enjoy your {{i.name}}{{ i.qty > 1 &&(i.name.toLowerCase() !== "fries" && i.name.toLowerCase() !== "batteries")? "s" : "" }}!</p>
+							</td>
+
+							<td *ngIf="i.qty >= i.inStock" class="low-stock">
+								<p>We only have {{i.inStock}} {{i.name}}{{ i.qty > 1 && i.name.toLowerCase() !== "fries" && i.name.toLowerCase() !== "batteries" ? "s" : "" }} in stock.</p>
+							</td>
+
+						</tr>
+
+					</tbody>
+				</table>
+
+			</div>
+		</div>
+
+		<br>
+		<hr>
+
+			<div class="container mt-3">
+				<div class="row text-center justify-content-center">
+
+                   
+
+					<div class="col-sm-3">
+						<h5 class="jokes">Joke of the day</h5>
+						<p class="text-center">{{joke.value}}</p>
+					</div>
+                    
+                    <div class="col-sm-3">
+                        <h5 class="cart-qty">Cart Qty</h5>
+                        <ng-container *ngIf="qtyCount() === 1; else multipleItems">
+                            <p>You have {{qtyCount()}} item in your cart</p>
+                        </ng-container>
+                        <ng-template #multipleItems>
+                            <p>You have {{qtyCount()}} items in your cart</p>
+                        </ng-template>
+                    </div>
+                    
+
+					<div *ngIf="subtotal" class="col-sm-3 ">
+						<h5 class="subtotal">Subtotal</h5>
+						<p>Your subtotal is : {{subtotal() | currency}}</p>
+					</div>
+					<div *ngIf="taxTotal" class="col-sm-3 ">
+						<h5 class="tax-total">Total after 10% tax</h5>
+						<p>Your total after tax is : {{taxTotal() | currency}}</p>
+					</div>
+
+				</div>
+			</div>

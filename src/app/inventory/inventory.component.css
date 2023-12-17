@@ -1,0 +1,38 @@
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+       -webkit-appearance: none;
+        margin: 0;
+} 
+
+.table-narrow{
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.cart-empty{
+    color: red;
+}
+
+.in-stock{
+    color: green;
+}
+
+.low-stock{
+    color: darkorange;
+}
+
+.jokes{
+    color: darkblue;
+}
+
+.cart-qty{
+    color: darkblue;
+}
+
+.subtotal{
+    color: red;
+}
+
+.tax-total{
+    color: darkblue;
+}
